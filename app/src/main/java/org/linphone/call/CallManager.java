@@ -32,6 +32,7 @@ import org.linphone.core.Address;
 import org.linphone.core.Call;
 import org.linphone.core.CallParams;
 import org.linphone.core.Core;
+import org.linphone.core.MediaDirection;
 import org.linphone.core.MediaEncryption;
 import org.linphone.core.ProxyConfig;
 import org.linphone.core.tools.Log;
@@ -82,6 +83,7 @@ public class CallManager {
         Call call = core.getCurrentCall();
         CallParams params = core.createCallParams(call);
         params.enableVideo(false);
+        params.setVideoDirection(MediaDirection.RecvOnly);
         call.update(params);
     }
 
@@ -329,7 +331,7 @@ public class CallManager {
         core.inviteAddressWithParams(address, params);
     }
 
-    private boolean reinviteWithVideo() {
+    public boolean reinviteWithVideo() {
         Core core = LinphoneManager.getCore();
         Call call = core.getCurrentCall();
         if (call == null) {

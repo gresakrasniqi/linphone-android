@@ -22,6 +22,7 @@ package org.linphone.chat;
 import static android.content.Context.INPUT_METHOD_SERVICE;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.Fragment;
@@ -50,6 +51,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import androidx.annotation.NonNull;
 import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.view.menu.MenuPopupHelper;
 import androidx.core.view.inputmethod.InputConnectionCompat;
@@ -1111,6 +1113,7 @@ public class ChatMessagesFragment extends Fragment
         mMessageTextToSend.setText("");
     }
 
+    @SuppressLint("RestrictedApi")
     private void showPopupMenu() {
         MenuBuilder builder = new MenuBuilder(getActivity());
         MenuPopupHelper popupMenu = new MenuPopupHelper(getActivity(), builder, mPopupMenu);
@@ -1451,6 +1454,12 @@ public class ChatMessagesFragment extends Fragment
     @Override
     public void onChatMessageParticipantImdnStateChanged(
             ChatRoom cr, ChatMessage msg, ParticipantImdnState state) {}
+
+    @Override
+    public void onChatMessageSending(@NonNull ChatRoom chatRoom, @NonNull EventLog eventLog) {}
+
+    @Override
+    public void onNewEvent(@NonNull ChatRoom chatRoom, @NonNull EventLog eventLog) {}
 
     @Override
     public void onSubjectChanged(ChatRoom cr, EventLog event) {
